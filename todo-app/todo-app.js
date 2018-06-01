@@ -1,5 +1,5 @@
 
-let todos = getSavedTodos()
+const todos = getSavedTodos()
 
 const filters = {
     SearchText: '',

@@ -19,6 +19,7 @@ const renderTodos = function(filters, todos) {
 
     let filteredTodos = ''
     if (filters.hideCompleted) {
+        debugger
         filteredTodos = todos.filter(function(todos) {
             return !todos.completed && todos.text.toLowerCase().includes(filters.SearchText.toLowerCase())
         })
@@ -36,15 +37,10 @@ const renderTodos = function(filters, todos) {
     }
     
     document.querySelector('#contain-todos').innerHTML = ''
-    
-    const todosLeft = getThingsToDo(todos)
-
-    const incompleteTodos = generateSummaryDOM(todosLeft)
-    document.querySelector('#contain-todos').appendChild(incompleteTodos)
+    document.querySelector('#contain-todos').appendChild(generateSummaryDOM(getThingsToDo))
 
     filteredTodos.forEach(function(todos) {
-        const generatedTodos = generateDOM(todos)
-        document.querySelector('#contain-todos').appendChild(generatedTodos)
+        document.querySelector('#contain-todos').appendChild(generateDOM(todos))
     })
 }
 
@@ -55,8 +51,8 @@ const generateDOM = function(todo) {
     return pTodos
 }
 //Get the DOM summary for list summary
-const generateSummaryDOM = function(todosLeft) {
+const generateSummaryDOM = function(getThingsToDo) {
     const pTodosLeft = document.createElement('h2')
-    pTodosLeft.textContent = `You have ${todosLeft.length} todos left`
+    pTodosLeft.textContent = `You have ${getThingsToDo.length} todos left`
     return pTodosLeft
 } 
