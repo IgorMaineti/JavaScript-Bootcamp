@@ -60,8 +60,3 @@ const generateSummaryDOM = function(todosLeft) {
     pTodosLeft.textContent = `You have ${todosLeft.length} todos left`
     return pTodosLeft
 } 
-
-//teste
-const balala = function() {
-    console.log('teste')
-}
