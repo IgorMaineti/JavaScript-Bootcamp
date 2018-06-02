@@ -6,8 +6,6 @@ const filters = {
     hideCompleted: false
 }
 
-getSavedTodos()
-
 renderTodos(filters, todos)
 
 document.querySelector('#search-text').addEventListener('input', function(e) {
@@ -19,10 +17,11 @@ document.querySelector('#todo-form').addEventListener('submit', function(e) {
     e.preventDefault()
     const newTodo =  e.target.elements.addTodo.value
     todos.push({
+        id: uuidv4(),
         text: newTodo,
         completed: false
     })
-    saveTodos()
+    saveTodos(todos)
     renderTodos(filters, todos)
     e.target.elements.addTodo.value = ''
 })
