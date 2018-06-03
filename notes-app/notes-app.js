@@ -1,11 +1,28 @@
+const notes = getSavedNotes()
 
-// const p = document.querySelector('p')
-// p.remove()
+const filters = {
+    searchText: ''
+}
 
-// const ps = document.querySelectorAll('p')
+renderNotes(notes, filters)
 
-// ps.forEach(function (p) {
-//     p.textContent = '*********'
-//     // console.log(p.textContent)
-//     //p.remove()
-// })
+document.querySelector('#create-note').addEventListener('click', function (e) {
+    const noteId = uuidv4()
+    notes.push({
+        id: noteId,
+        title: '',
+        body: ''
+    })
+    saveNotes(notes)
+    renderNotes(notes, filters)
+    goToEditPage(noteId)
+})
+
+document.querySelector('#search-text').addEventListener('input', function (e) {
+    filters.searchText = e.target.value
+    renderNotes(notes, filters)
+})
+
+document.querySelector('#filter-by').addEventListener('change', function (e) {
+    console.log(e.target.value)
+})
