@@ -1,5 +1,5 @@
 // Read existing notes from localStorage
-const getSavedNotes = function () {
+const getSavedNotes = () => {
     const notesJSON = localStorage.getItem('notes')
 
     if (notesJSON !== null) {
@@ -10,19 +10,17 @@ const getSavedNotes = function () {
 }
 
 // Save the notes to localStorage
-const saveNotes = function (notes) {
+const saveNotes = (notes) => {
     localStorage.setItem('notes', JSON.stringify(notes))
 }
 
-const goToEditPage = function(noteId) {
+const goToEditPage = (noteId) => {
     location.assign(`/edit.html#${noteId}`)
 }
 
 // Remove a note from the list
-const removeNote = function (id) {
-    const noteIndex = notes.findIndex(function (note) {
-        return note.id === id
-    })
+const removeNote = (id) => {
+    const noteIndex = notes.findIndex((note) => note.id === id)
 
     if (noteIndex > -1) {
         notes.splice(noteIndex, 1)
@@ -30,7 +28,7 @@ const removeNote = function (id) {
 }
 
 // Generate the DOM structure for a note
-const generateNoteDOM = function (note) {
+const generateNoteDOM = (note) => {
     const noteEl = document.createElement('div')
     const linkEl = document.createElement('a')
     const textEl = document.createElement('span')
@@ -39,7 +37,7 @@ const generateNoteDOM = function (note) {
     // Setup the remove note button
     button.textContent = 'x'
     noteEl.appendChild(button)
-    button.addEventListener('click', function () {
+    button.addEventListener('click', () => {
         removeNote(note.id)
         saveNotes(notes)
         renderNotes(notes, filters)
@@ -61,7 +59,7 @@ const generateNoteDOM = function (note) {
 }
 
 // Sort notes by one of three ways
-const sortNotes = function (notes, sortBy) {
+const sortNotes = (notes, sortBy) => {
     if (sortBy === 'byEdited') {
         return notes.sort(function (a, b) {
             if (a.updatedAt > b.updatedAt) {
@@ -98,21 +96,19 @@ const sortNotes = function (notes, sortBy) {
 }
 
 // Render application notes
-const renderNotes = function (notes, filters) {
+const renderNotes = (notes, filters) => {
     notes = sortNotes(notes, filters.sortBy)
-    const filteredNotes = notes.filter(function (note) {
-        return note.title.toLowerCase().includes(filters.searchText.toLowerCase())
-    })
+    const filteredNotes = notes.filter((note) => note.title.toLowerCase().includes(filters.searchText.toLowerCase()))
 
     document.querySelector('#notes').innerHTML = ''
 
-    filteredNotes.forEach(function (note) {
+    filteredNotes.forEach((note) => {
         const noteEl = generateNoteDOM(note)
         document.querySelector('#notes').appendChild(noteEl)
     })
 }
 
 //Update edit
-const updateEdit = function(notes)  {
+const updateEdit = (notes) => {
     updateElement.textContent = `Last edited ${moment(note.updatedAt).fromNow()}`
 }

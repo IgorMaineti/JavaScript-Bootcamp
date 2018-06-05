@@ -8,12 +8,12 @@ const filters = {
 
 renderTodos(filters, todos)
 
-document.querySelector('#search-text').addEventListener('input', function(e) {
+document.querySelector('#search-text').addEventListener('input', (e) => {
     filters.SearchText = e.target.value
     renderTodos(filters, todos)
 })
 
-document.querySelector('#todo-form').addEventListener('submit', function(e) {
+document.querySelector('#todo-form').addEventListener('submit', (e) => {
     e.preventDefault()
     const newTodo =  e.target.elements.addTodo.value
     todos.push({
@@ -26,7 +26,7 @@ document.querySelector('#todo-form').addEventListener('submit', function(e) {
     e.target.elements.addTodo.value = ''
 })
 
-document.querySelector('#hideTodos').addEventListener('change', function(e) {
+document.querySelector('#hideTodos').addEventListener('change', (e) => {
     filters.hideCompleted = !filters.hideCompleted
     renderTodos(filters, todos)
 })
